@@ -1,0 +1,16 @@
+{
+  "name": "helloworld-website",
+  "version": "1.0.0",
+  "description": "我的第一个AI开发的网站 - Hello World 示例",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "helloworld",
+    "nodejs",
+    "website"
+  ],
+  "author": "你的名字",
+  "license": "MIT"
+}

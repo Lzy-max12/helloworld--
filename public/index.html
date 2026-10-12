@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World - 我的第一个AI开发的网站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 720px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 48px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(6px);
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+    .time-label {
+      font-size: 16px;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+    .time-value {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 20px;
+    }
+    .hint {
+      font-size: 13px;
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hello World！我是【你的名字】，我的第一个AI开发的网站</h1>
+    <p class="time-label">当前服务器时间：</p>
+    <p id="serverTime" class="time-value">{{SERVER_TIME}}</p>
+    <p class="hint">页面每 1 秒自动向服务器请求并刷新最新时间。</p>
+  </div>
+
+  <script>
+    // 每 1 秒请求服务器 /time 接口，获取并显示最新服务器时间
+    async function refreshServerTime() {
+      try {
+        const res = await fetch('/time');
+        const data = await res.json();
+        document.getElementById('serverTime').textContent = data.time;
+      } catch (e) {
+        console.error('获取服务器时间失败：', e);
+      }
+    }
+    setInterval(refreshServerTime, 1000);
+  </script>
+</body>
+</html>
