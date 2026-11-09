@@ -58,20 +58,17 @@
     <h1>Hello World！我是刘祖源，我的第一个AI开发的网站</h1>
     <p class="time-label">当前服务器时间：</p>
     <p id="serverTime" class="time-value">{{SERVER_TIME}}</p>
-    <p class="hint">页面每 1 秒自动向服务器请求并刷新最新时间。</p>
+    <p class="hint">页面每 1 秒自动刷新当前时间（东八区）。</p>
   </div>
 
   <script>
-    // 每 1 秒请求服务器 /time 接口，获取并显示最新服务器时间
-    async function refreshServerTime() {
-      try {
-        const res = await fetch('/time');
-        const data = await res.json();
-        document.getElementById('serverTime').textContent = data.time;
-      } catch (e) {
-        console.error('获取服务器时间失败：', e);
-      }
+    // 每 1 秒刷新并显示当前时间（东八区，浏览器本地实时计算）
+    function refreshServerTime() {
+      const now = new Date();
+      const t = now.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
+      document.getElementById('serverTime').textContent = t;
     }
+    refreshServerTime();
     setInterval(refreshServerTime, 1000);
   </script>
 </body>
